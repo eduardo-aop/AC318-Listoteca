@@ -1,65 +1,65 @@
 CREATE TABLE `Teacher` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` TEXT(50) NOT NULL,
-	`email` TEXT(50) NOT NULL UNIQUE,
-	`password` TEXT(50) NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	`email` VARCHAR(50) NOT NULL UNIQUE,
+	`password` VARCHAR(50) NOT NULL,
 	PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE `Problem` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`question` TEXT(200) NOT NULL,
+	`question` VARCHAR(200) NOT NULL,
 	`answer_id` INT NOT NULL,
 	`subject` INT NOT NULL,
 	`theme` INT NOT NULL,
 	PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE `Answer` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`text` TEXT(200) NOT NULL,
+	`text` VARCHAR(200) NOT NULL,
 	`subject` INT NOT NULL,
 	`theme` INT NOT NULL,
 	PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE `Student` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` TEXT(50) NOT NULL,
-	`email` TEXT(50) NOT NULL UNIQUE,
-	`password` TEXT(50) NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
+	`email` VARCHAR(50) NOT NULL UNIQUE,
+	`password` VARCHAR(50) NOT NULL,
 	PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE `List` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`theme` TEXT(50) NOT NULL,
+	`theme` VARCHAR(50) NOT NULL,
 	`deadline` TIME NOT NULL,
 	`student_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE `List_Has_Problem` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`list_id` INT NOT NULL,
 	`problem_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE `Class` (
 	`id` INT NOT NULL AUTO_INCREMENT,
-	`name` TEXT(50) NOT NULL,
+	`name` VARCHAR(50) NOT NULL,
 	`teacher_id` INT NOT NULL,
 	`theme` TEXT NOT NULL,
 	PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB;
 
 CREATE TABLE `Student_Has_Class` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`student_id` INT NOT NULL,
 	`class_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB;
 
 ALTER TABLE `Problem` ADD CONSTRAINT `Problem_fk0` FOREIGN KEY (`answer_id`) REFERENCES `Answer`(`id`);
 
