@@ -4,8 +4,7 @@ var app = express();
 
 var cors = require('cors')
 var bodyParser = require('body-parser');
-var router = require('./app/routes.js');
-var mysql = require('mysql');
+var router = require('./app/routers.js');
 
 const IP_ADDRESS = "127.0.0.1"
 const PORT = 8000;
@@ -21,8 +20,6 @@ app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/", router);
-
-app.use(express.static(__dirname + "../front-end/"));
 
 var server = app.listen(PORT, function () {
 	var host = server.address().address

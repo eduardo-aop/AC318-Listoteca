@@ -1,6 +1,7 @@
 //require express
 var express = require('express');
 var path    = require('path');
+var student = require('./student.js');
 
 //create router object
 var router = express.Router();
@@ -9,11 +10,7 @@ var router = express.Router();
 module.exports = router;
 
 //Rotas
-router.get('/client/:id', function(req, res) {
-    console.log(req.params);
-    res.status(200);
-    res.send("foi");
-});
+router.route('/student').get(student.getStudent);
 
 router.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../../front-end/index.html'));
