@@ -7,15 +7,7 @@ var dbData = {
     database: 'listoteca'
 };
 
-var sendError = function(res, err, status) {
-    console.log(err);
-    res.status(status);
-    res.end();
-};
-
 exports.dbData = dbData;
-exports.sendError = sendError;
-
 
 /*module.exports = {
     con: mysql.createConnection(dbConn),

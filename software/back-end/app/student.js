@@ -1,5 +1,6 @@
 var path    = require('path');
 var db = require('../db.js');
+var error = db.sendError
 var mysql = require('mysql');
 
 module.exports = {
@@ -7,14 +8,19 @@ module.exports = {
         var connection = mysql.createConnection(db.dbData);
 
         connection.connect(function(err) {
-            db.sendError(res, 'err', 500)
             if (err) {
-                db.sendError(res, err, 500)
+                console.log(err);
+                res.status(500);
+                res.end()
             }
             else {
                 console.log("Connected!");
                 connection.query("SELECT * FROM student", function (err, result, fields) {
-                    if (err) db.sendError(err, 500)
+                    if (err) {
+                        console.log(err);
+                        res.status(500);
+                        res.end()
+                    }
                     else {
                         console.log(result);
                         res.status(200);
