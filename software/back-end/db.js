@@ -1,18 +1,28 @@
-
 var mysql = require('mysql');
 
-var dbConn = {
+var dbData = {
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'listoteca'
 };
 
-module.exports = {
+var sendError = function(res, err, status) {
+    console.log(err);
+    res.status(status);
+    res.end();
+};
+
+exports.dbData = dbData;
+exports.sendError = sendError;
+
+
+/*module.exports = {
     con: mysql.createConnection(dbConn),
-    senError: function(err, status) {
-        console.log(err);
-        res.status(status);
+
+    sendError: function(err, status) {
+        console.log('err');
+        res.status('status');
         res.end()
     }
-}
+}*/
