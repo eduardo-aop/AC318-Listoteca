@@ -9,14 +9,7 @@ var router = require('./app/routers.js');
 const IP_ADDRESS = "127.0.0.1"
 const PORT = 8000;
 
-var dbConn = {
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'listoteca'
-    };
-
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use("/", router);
