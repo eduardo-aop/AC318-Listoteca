@@ -3,7 +3,7 @@ var db      = require('../db.js');
 var mysql   = require('mysql');
 
 module.exports = {
-    getStudentById : function(req, res){
+    getQuestionById : function(req, res){
         var connection = mysql.createConnection(db.dbData);
 
         var id = req.params.id;
@@ -14,7 +14,7 @@ module.exports = {
             }
             else {
                 console.log("Connected!");
-                var query = "SELECT * FROM student WHERE id = ?";
+                var query = "SELECT * FROM problem WHERE id = ?";
                 connection.query(query, [id], function (err, result, fields) {
                     if (err) {
                         console.log(err);
@@ -28,7 +28,7 @@ module.exports = {
             }
         });
     },
-    getAllStudents : function(req, res){
+    getAllQuestions : function(req, res){
         var connection = mysql.createConnection(db.dbData);
 
         connection.connect(function(err) {
@@ -38,7 +38,7 @@ module.exports = {
             }
             else {
                 console.log("Connected!");
-                var query = "SELECT * FROM student";
+                var query = "SELECT * FROM problem";
                 connection.query(query, function (err, result, fields) {
                     if (err) {
                         console.log(err);
@@ -52,29 +52,35 @@ module.exports = {
             }
         });
     },
-    saveStudent : function(req, res){
+    saveQuestion : function(req, res){
         var connection = mysql.createConnection(db.dbData);
 
-        var name = req.body.name;
-        var email = req.body.email;
-        var password = req.body.password;
+        var question = req.body.question;
+        var subject = req.body.subject;
+        var theme = req.body.theme;
+        var answer = req.body.answer;
         connection.connect(function(err) {
-            var query = "INSERT INTO student(name, email, password) VALUES (?, ?, ?)";
-            connection.query(query, [name, email, password], function (err, result, fields) {
+            var query = "INSERT INTO answer(text, subject, theme) VALUES (?, ?, ?)";
+            connection.query(query, [answer.text, answer.subject, answer.theme], function (err, result, fields) {
                 if (err) {
-                    if (err.code == 'ER_DUP_ENTRY') {
-                        console.log(err);
-                        res.sendStatus(409);
-                    } else {
-                        console.log(err);
-                        res.sendStatus(500);
-                    }
+                    console.log(err);
+                    res.sendStatus(500);
+                    connection.end();
                 } else {
                     console.log(result);
-                    res.sendStatus(200);
+                    var query = "INSERT INTO problem(question, answer_id, subject, theme) VALUES (?, ?, ?, ?)";
+                    connection.query(query, [question, result.insertId, subject, theme], function (err, result, fields) {
+                        if (err) {
+                            console.log(err);
+                            res.sendStatus(500);
+                        } else {
+                            console.log(result);
+                            res.sendStatus(200);
+                        }
+                    });
+                    connection.end();
                 }
             });
-            connection.end();
         });
     }
 }

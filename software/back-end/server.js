@@ -1,10 +1,10 @@
 /*Pacotes que serão usados no projeto */
-var express = require('express');
-var app = express();
+var express     = require('express');
+var app         = express();
 
-var cors = require('cors')
-var bodyParser = require('body-parser');
-var router = require('./app/routers.js');
+var cors        = require('cors')
+var bodyParser  = require('body-parser');
+var router      = require('./app/routers.js');
 
 const IP_ADDRESS = "127.0.0.1"
 const PORT = 8000;
