@@ -38,7 +38,7 @@ module.exports = {
             }
             else {
                 console.log("Connected!");
-                var query = "SELECT * FROM problem";
+                var query = "SELECT * FROM problem as p JOIN false_answer as f ON p.id = f.problem_id";
                 connection.query(query, function (err, result, fields) {
                     if (err) {
                         console.log(err);
@@ -59,6 +59,7 @@ module.exports = {
         var subject = req.body.subject;
         var theme = req.body.theme;
         var answer = req.body.answer;
+        var falseAnswer = req.body.false_answer;
         connection.connect(function(err) {
             var query = "INSERT INTO answer(text, subject, theme) VALUES (?, ?, ?)";
             connection.query(query, [answer.text, answer.subject, answer.theme], function (err, result, fields) {
@@ -73,12 +74,35 @@ module.exports = {
                         if (err) {
                             console.log(err);
                             res.sendStatus(500);
+                            connection.end();
                         } else {
-                            console.log(result);
-                            res.sendStatus(200);
+                            var i;
+                            for (i = 0; i < falseAnswer.length; i++) {
+                                falseAnswer[i].problemId = result.insertId;
+                            }
+
+                            var j;
+                            var arr = [];
+                            for (i = 0; i < falseAnswer.length; i++) {
+                                arr[i] = Object.values(falseAnswer[i]);
+                            }
+                            //
+                            console.log('arr');
+                            console.log(arr);
+
+                            var query = "INSERT INTO false_answer(text, subject, theme, problem_id) VALUES ?";
+                            connection.query(query, [arr], function (err, result, fields) {
+                                if (err) {
+                                    console.log(err);
+                                    res.sendStatus(500);
+                                } else {
+                                    console.log(result);
+                                    res.sendStatus(200);
+                                }
+                            });
+                            connection.end();
                         }
                     });
-                    connection.end();
                 }
             });
         });
