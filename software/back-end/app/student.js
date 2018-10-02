@@ -1,6 +1,6 @@
 var path    = require('path');
-var db = require('../db.js');
-var mysql = require('mysql');
+var db      = require('../db.js');
+var mysql   = require('mysql');
 
 module.exports = {
     getStudentById : function(req, res){
