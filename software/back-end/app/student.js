@@ -1,34 +1,80 @@
 var path    = require('path');
 var db = require('../db.js');
-var error = db.sendError
 var mysql = require('mysql');
 
 module.exports = {
-    getStudent : function(req, res){
+    getStudentById : function(req, res){
+        var connection = mysql.createConnection(db.dbData);
+
+        var id = req.params.id;
+        connection.connect(function(err) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            }
+            else {
+                console.log("Connected!");
+                var query = "SELECT * FROM student WHERE id = ?";
+                connection.query(query, [id], function (err, result, fields) {
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(500);
+                    } else {
+                        console.log(result);
+                        res.send(result);
+                    }
+                });
+                connection.end();
+            }
+        });
+    },
+    getAllStudents : function(req, res){
         var connection = mysql.createConnection(db.dbData);
 
         connection.connect(function(err) {
             if (err) {
                 console.log(err);
-                res.status(500);
-                res.end()
+                res.sendStatus(500);
             }
             else {
                 console.log("Connected!");
-                connection.query("SELECT * FROM student", function (err, result, fields) {
+                var query = "SELECT * FROM student";
+                connection.query(query, function (err, result, fields) {
                     if (err) {
                         console.log(err);
-                        res.status(500);
-                        res.end()
-                    }
-                    else {
+                        res.sendStatus(500);
+                    } else {
                         console.log(result);
-                        res.status(200);
-                        res.send(result)
+                        res.send(result);
                     }
                 });
                 connection.end();
             }
+        });
+    },
+    saveStudent : function(req, res){
+        var connection = mysql.createConnection(db.dbData);
+
+        var name = req.body.name;
+        var email = req.body.email;
+        var password = req.body.password;
+        connection.connect(function(err) {
+            var query = "INSERT INTO student(name, email, password) VALUES (?, ?, ?)";
+            connection.query(query, [name, email, password], function (err, result, fields) {
+                if (err) {
+                    if (err.code == 'ER_DUP_ENTRY') {
+                        console.log(err);
+                        res.sendStatus(409);
+                    } else {
+                        console.log(err);
+                        res.sendStatus(500);
+                    }
+                } else {
+                    console.log(result);
+                    res.sendStatus(200);
+                }
+            });
+            connection.end();
         });
     }
 }

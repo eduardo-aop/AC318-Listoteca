@@ -10,7 +10,9 @@ var router = express.Router();
 module.exports = router;
 
 //Rotas
-router.route('/student').get(student.getStudent);
+router.route('/student/:id').get(student.getStudentById);
+router.route('/student').get(student.getAllStudents);
+router.route('/student').post(student.saveStudent);
 
 router.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../../front-end/index.html'));
