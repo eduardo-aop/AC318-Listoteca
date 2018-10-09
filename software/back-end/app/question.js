@@ -41,13 +41,17 @@ module.exports = {
                 var query = "SELECT p.id, p.question, a.text as answer, GROUP_CONCAT(CONCAT(f.text)) false_answers " +
                             "FROM problem as p LEFT JOIN false_answer as f ON p.id = f.problem_id " +
                             "JOIN answer as a ON p.answer_id = a.id GROUP BY p.id";
-                            
+
                 connection.query(query, function (err, result, fields) {
                     if (err) {
                         console.log(err);
                         res.sendStatus(500);
                     } else {
                         console.log(result);
+                        var i;
+                        for(i = 0; i < result.length; i++) {
+                            result[i].false_answers = result[i].false_answers.split(',');
+                        }
                         res.send(result);
                     }
                 });
