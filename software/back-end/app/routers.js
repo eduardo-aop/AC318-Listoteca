@@ -22,7 +22,7 @@ router.route('/student').post(student.updateStudent);
 router.route('/teacher/:id').get(teacher.getTeacherById);
 router.route('/teacher').get(teacher.getAllTeachers);
 router.route('/teacher').post(teacher.saveTeacher);
-router.route('/teacher').post(teacher.updateTeacher);
+router.route('/teacherp').post(teacher.updateTeacher);
 
 //problem
 router.route('/question/:id').get(question.getQuestionById);
