@@ -1,15 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core'; 
 
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { AppRoutingModule, routing } from './app-routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { ClassComponent } from './class/class.component';
-import { ClassDetailComponent } from './class-detail/class-detail.component';
-import { ClassService } from './class/class.service';
+import { ExerciseListComponent } from './exercise-list/exercise-list.component';
+
+import { AppRoutingModule } from './app-routing.module';
+import { ClassModule } from './class/class.module';
 
 @NgModule({
   declarations: [
@@ -17,15 +16,15 @@ import { ClassService } from './class/class.service';
     LoginComponent,
     HomeComponent,
     NavBarComponent,
-    ClassComponent,
-    ClassDetailComponent
+    ExerciseListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    routing
+    ClassModule,
+    AppRoutingModule
   ],
-  providers: [ClassService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

@@ -6,22 +6,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { ClassComponent } from './class/class.component';
-import { ClassDetailComponent } from './class-detail/class-detail.component';
+import { ExerciseListComponent } from './exercise-list/exercise-list.component';
 
-const routes: Routes = [
+const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'classes', component: ClassComponent },
-  { path: 'classe/:id', component: ClassDetailComponent }
+  { path: 'exercise', component: ExerciseListComponent }
 ];
-
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  declarations: []
+  declarations: [],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
