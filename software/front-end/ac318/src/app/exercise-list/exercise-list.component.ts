@@ -17,4 +17,7 @@ export class ExerciseListComponent implements OnInit {
     console.log(this.exercises);
   }
 
+  addExercise() {
+    console.log('add');
+  }
 }

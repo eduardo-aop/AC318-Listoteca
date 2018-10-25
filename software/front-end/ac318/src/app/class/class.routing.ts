@@ -4,10 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ClassComponent } from './class.component';
 import { ClassDetailComponent } from './class-detail/class-detail.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const classRoutes: Routes = [
-  { path: 'classes', component: ClassComponent },
-  { path: 'class/:id', component: ClassDetailComponent }
+  { path: '', component: ClassComponent, canActivate: [AuthGuard]  },
+  { path: ':id', component: ClassDetailComponent, canActivate: [AuthGuard]  }
 ];
 
 @NgModule({

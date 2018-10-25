@@ -6,12 +6,28 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { ExerciseListComponent } from './exercise-list/exercise-list.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'exercise', component: ExerciseListComponent }
+  { 
+    path: 'class', 
+    loadChildren: './class/class.module#ClassModule', 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: '', 
+    component: HomeComponent,
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent 
+  },
+  { 
+    path: 'exercise', 
+    loadChildren: './exercise-list/exercise-list.module#ExerciseListModule', 
+    canActivate: [AuthGuard] 
+  }
 ];
 
 @NgModule({
