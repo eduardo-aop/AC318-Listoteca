@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ExerciseListComponent } from './exercise-list.component';
+import { ExerciseListDetailComponent } from './exercise-list-detail/exercise-list-detail.component';
 import { AuthGuard } from '../guards/auth.guard';
 
 const exerciseRoutes: Routes = [
-  { path: '', component: ExerciseListComponent, canActivate: [AuthGuard]  }
+  { path: '', component: ExerciseListComponent, canActivate: [AuthGuard] },
+  { path: ':id', component: ExerciseListDetailComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

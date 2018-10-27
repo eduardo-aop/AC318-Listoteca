@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { ExerciseListComponent } from './exercise-list.component'
 import { ExerciseRoutingModule } from './exercise.routing';
+import { ExerciseComponent } from './exercise/exercise.component';
+import { ExerciseListDetailComponent } from './exercise-list-detail/exercise-list-detail.component';
 
 @NgModule({
     imports:[
@@ -10,7 +12,9 @@ import { ExerciseRoutingModule } from './exercise.routing';
         ExerciseRoutingModule
     ],
     declarations:[
-        ExerciseListComponent
+        ExerciseListComponent,
+        ExerciseComponent,
+        ExerciseListDetailComponent
     ],
     exports:[],
     providers:[]

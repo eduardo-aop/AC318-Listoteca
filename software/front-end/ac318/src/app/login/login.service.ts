@@ -17,17 +17,28 @@ export class LoginService {
     //TODO: call back end
 
     if(user.name === "eduardo") {
-      this.userAuthenticated = true;
-
-      this.showNavBarEmitter.emit(true);
-      this.router.navigate(['/']);
+      this.setUserAuthentitated(true);
     } else {
-      this.showNavBarEmitter.emit(false);
-      this.userAuthenticated = false;
+      this.setUserAuthentitated(false);
     }
+  }
+
+  doLogout() {
+    this.setUserAuthentitated(false);
   }
 
   userIsAuthenticated() {
     return this.userAuthenticated;
+  }
+
+  setUserAuthentitated(authentitated: boolean) {
+    this.userAuthenticated = authentitated;
+    this.showNavBarEmitter.emit(authentitated);
+
+    if (authentitated) {
+      this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

@@ -1,16 +1,16 @@
 <nav *ngIf="showMenu">
-    <div class="nav-wrapper">
-        <a routerLink="/" class="brand-logo right">Logo</a>
-        <a (click)="menuClick()" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="left hide-on-med-and-down">
-            <li><a routerLink="">Home</a></li>
+    <div class="nav-wrapper blue">
+      <a routerLink="/" class="brand-logo center">Listoteca</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a routerLink="">Home</a></li>
             <!--<li><a routerLink="login">Login</a></li>-->
             <li><a routerLink="class">Turmas</a></li>
             <!--<li><a [routerLink]="['class', 5]">Turma com Id</a></li>-->
             <li><a routerLink="exercise">Exercicios</a></li>
-        </ul>
+            <li><a (click)="logout()">Sair</a></li>
+      </ul>
     </div>
-</nav>
+  </nav>
 
 <div class="container">
     <router-outlet></router-outlet>

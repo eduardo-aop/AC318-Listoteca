@@ -1,22 +1,9 @@
-<p>
-  exercise-list works!
-</p>
-
-<div layout="row" *ngFor='let exercise of exercises'>
-  <div class="col s1 m1 l1">
-    <h2 class="header">{{ exercise.id }}</h2>
-    <div class="card horizontal">
-      <div class="card-image">
-        <img src="https://lorempixel.com/100/190/nature/{{exercise.id}}">
-      </div>
-      <div class="card-stacked">
-        <div class="card-content">
-          <p>{{ exercise.question }}</p>
-        </div>
-        <div class="card-action">
-          <a [routerLink]="['/class', exercise.id]">This is a link</a>
-        </div>
-      </div>
+<div *ngFor='let list of lists'>
+  <div class="card">
+    <h5 class="card-header">{{ list.subject }}</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{ list.theme }}</h5>
+      <a [routerLink]="['/exercise', list.id]" class="btn btn-primary">Ver exercícios</a>
     </div>
   </div>
 </div>

@@ -8,13 +8,13 @@ import { ExerciseService } from './exercise.service';
 })
 export class ExerciseListComponent implements OnInit {
 
-  exercises: any[];
+  lists: any[] = [];
 
   constructor(private exerciseService: ExerciseService) { }
 
   ngOnInit() {
-    this.exercises = this.exerciseService.getExercises();
-    console.log(this.exercises);
+    this.lists = this.exerciseService.getExerciseList();
+    console.log(this.lists);
   }
 
   addExercise() {

@@ -22,4 +22,8 @@ export class AppComponent {
       }
     );
   }
+
+  logout() {
+    this.loginService.doLogout();
+  }
 }
