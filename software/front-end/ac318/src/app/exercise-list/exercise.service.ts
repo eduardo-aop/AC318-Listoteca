@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Exercise } from './exercise';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExerciseService {
 
-  constructor() { }
+  private url = "http://localhost:8000";
+
+  constructor(private http: HttpClient) { }
 
   getExercises() {
     return [
@@ -26,5 +37,12 @@ export class ExerciseService {
       { id: 4, theme: "nada de mais", subject: 'Eng SW'},
       { id: 5, theme: "eita sei la", subject: 'POO'}
     ];
+  }
+
+  addExercise(exercise: Exercise): Observable<Exercise> {
+    this.url = this.url + "/exercise";
+    return this.http.post<Exercise>(this.url, exercise, httpOptions).pipe(
+      tap((exercise: Exercise) => console.log('Added'))
+    );
   }
 }

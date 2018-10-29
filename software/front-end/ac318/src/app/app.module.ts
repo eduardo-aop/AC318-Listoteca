@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -20,11 +21,12 @@ import { AuthGuard } from './guards/auth.guard';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule
   ],
   providers: [LoginService, AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 }

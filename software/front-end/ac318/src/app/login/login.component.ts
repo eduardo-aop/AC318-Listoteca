@@ -10,15 +10,20 @@ import { User } from './user';
 export class LoginComponent implements OnInit {
 
   private user: User = new User()
-
+  private userNameError = false
+  
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
-
+    
   }
 
   doLogin() {
-    this.loginService.doLogin(this.user);
     console.log(this.user);
+    if (this.user.name != '') {
+      this.userNameError = !this.loginService.doLogin(this.user);
+    } else {
+      this.userNameError = true;
+    }
   }
 }

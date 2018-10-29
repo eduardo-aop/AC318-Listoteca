@@ -1,0 +1,77 @@
+<form action="#">
+  <p>
+    <label>
+      <input class="with-gap" name="group1" type="radio" (click)="setOpenQuestion(true)" checked />
+      <span>Aberta</span>
+    </label>
+  </p>
+  <p>
+    <label>
+      <input class="with-gap" name="group1" type="radio" (click)="setOpenQuestion(false)" />
+      <span>Fechada</span>
+    </label>
+  </p>
+</form>
+
+<div class="row">
+  <div class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="question" name="question" [(ngModel)]="exercise.question" type="text" class="validate">
+        <label for="question">Pergunta</label>
+      </div>
+    </div>
+    <div class="example-form">
+      <mat-form-field class="example-full-width">
+        <input [(ngModel)]="exercise.subject" type="text" placeholder="Matéria" aria-label="Number" matInput [formControl]="subjectControl"
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let subject of filteredSubjects | async" [value]="subject">
+            {{ subject }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <div class="example-form">
+      <mat-form-field class="example-full-width">
+        <input [(ngModel)]="exercise.theme" type="text" placeholder="Tema" aria-label="Number" matInput [formControl]="themeControl"
+          [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let theme of filteredThemes | async" [value]="theme">
+            {{ theme }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    
+    <div *ngIf='!openQuestion'>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
+          <label for="textarea2">Alternativa Correta</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
+          <label for="textarea2">Segunda Alternativa</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
+          <label for="textarea2">Terceira Alternativa</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea2" class="materialize-textarea" data-length="120"></textarea>
+          <label for="textarea2">Quarta Alternativa</label>
+        </div>
+      </div>
+    </div>
+    <button class="btn waves-effect waves-light" type="submit" (click)="add()">Salvar
+      <i class="material-icons right">save</i>
+    </button>
+  </div>
+</div>

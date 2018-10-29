@@ -18,8 +18,10 @@ export class LoginService {
 
     if(user.name === "eduardo") {
       this.setUserAuthentitated(true);
+      return true;
     } else {
       this.setUserAuthentitated(false);
+      return false;
     }
   }
 
