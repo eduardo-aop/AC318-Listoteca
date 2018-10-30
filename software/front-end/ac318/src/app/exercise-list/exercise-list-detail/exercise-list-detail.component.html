@@ -1,3 +1,11 @@
-<p>
-  exercise-list-detail works!
-</p>
+<div class="card" *ngFor="let exercise of exercises; let i=index">
+  <div class="card-header">
+    Questão {{ i+1 }}
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{ exercise.question }}</p>
+      <footer class="blockquote-footer" *ngFor="let ans of exercise.answers; let j=index">{{ j+1 }}) {{ ans }}</footer>
+    </blockquote>
+  </div>
+</div>

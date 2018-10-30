@@ -16,7 +16,7 @@ export class LoginService {
   doLogin(user: User) {
     //TODO: call back end
 
-    if(user.name === "eduardo") {
+    if(user.name === 'admin' && user.password == '1234') {
       this.setUserAuthentitated(true);
       return true;
     } else {

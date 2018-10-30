@@ -1,8 +1,7 @@
 export class Exercise {
     id: number;
     question: string;
-    answer: string;
-    false_answers: string[];
-    theme: string;
+    answers: string[];
     subject: string;
+    theme: string;
 }

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassComponent implements OnInit {
 
+  private classes: any[] = [{ id: 0, subject: 'POO', teacher: 'Teacher'}]
+
   constructor() { }
 
   ngOnInit() {

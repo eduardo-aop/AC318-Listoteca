@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExerciseService } from '../exercise.service';
 
 @Component({
   selector: 'app-exercise-list-detail',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExerciseListDetailComponent implements OnInit {
 
-  constructor() { }
+  private exercises: any[] = [];
+
+  constructor(private exerciseService: ExerciseService) { }
 
   ngOnInit() {
+    this.exercises = this.exerciseService.getExercisesFromList()
   }
 
 }

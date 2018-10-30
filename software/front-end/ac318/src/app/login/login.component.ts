@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   doLogin() {
     console.log(this.user);
-    if (this.user.name != '') {
+    if (this.user.name != '' && this.user.password != '') {
       this.userNameError = !this.loginService.doLogin(this.user);
     } else {
       this.userNameError = true;

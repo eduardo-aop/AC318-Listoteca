@@ -1,17 +1,15 @@
 <nav *ngIf="showMenu">
-    <div class="nav-wrapper blue">
-      <a routerLink="/" class="brand-logo center">Listoteca</a>
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a routerLink="">Home</a></li>
-            <!--<li><a routerLink="login">Login</a></li>-->
-            <li><a routerLink="class">Turmas</a></li>
-            <!--<li><a [routerLink]="['class', 5]">Turma com Id</a></li>-->
-            <li><a routerLink="exercise">Exercicios</a></li>
-            <li><a (click)="logout()">Sair</a></li>
-      </ul>
-    </div>
-  </nav>
+  <div class="nav-wrapper blue">
+    <a routerLink="/" class="brand-logo center">Listoteca</a>
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <li><a routerLink="">Home</a></li>
+      <li><a routerLink="class">Turmas</a></li>
+      <li><a routerLink="exercise">Lista de Exercicios</a></li>
+      <li><a (click)="logout()">Sair</a></li>
+    </ul>
+  </div>
+</nav>
 
 <div class="container">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

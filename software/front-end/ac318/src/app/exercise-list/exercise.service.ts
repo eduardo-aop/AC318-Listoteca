@@ -18,13 +18,13 @@ export class ExerciseService {
 
   constructor(private http: HttpClient) { }
 
-  getExercises() {
+  getExercisesFromList() {
     return [
-      { id: 0, question: "Testando"},
-      { id: 1, question: "Ja era"},
-      { id: 2, question: "Ja era"},
-      { id: 3, question: "Ja era"},
-      { id: 4, question: "Ja era"}
+      { id: 0, question: "Testando", answers: ['123', '311', '555'] },
+      { id: 1, question: "Ja era", answers: ['123', '311', '555'] },
+      { id: 2, question: "Ja era", answers: ['123', '311', '555'] },
+      { id: 3, question: "Ja era", answers: ['123', '311', '555'] },
+      { id: 4, question: "Ja era", answers: ['123', '311', '555'] }
     ];
   }
 
