@@ -16,6 +16,9 @@
   <div *ngIf="userNameError" class="alert alert-danger" role="alert">
     Usuário e/ou senha incorretos!
   </div>
+  <div *ngIf="emptyFields" class="alert alert-danger" role="alert">
+    Preencha todos os campos!
+  </div>
   <button class="btn waves-effect waves-light blue" type="submit" (click)="doLogin()">Login
     <i class="material-icons right">send</i>
   </button>

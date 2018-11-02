@@ -11,6 +11,7 @@ import { ExerciseComponent } from './exercise/exercise.component';
 import { ExerciseListDetailComponent } from './exercise-list-detail/exercise-list-detail.component';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { ExerciseService } from './exercise.service';
+import { CreateListComponent } from './create-list/create-list.component';
 
 @NgModule({
     imports: [
@@ -29,10 +30,12 @@ import { ExerciseService } from './exercise.service';
         ExerciseListComponent,
         ExerciseComponent,
         ExerciseListDetailComponent,
-        CreateExerciseComponent
+        CreateExerciseComponent,
+        CreateListComponent
     ],
-    exports: [],
-    providers: [ExerciseService]
+    exports: [CreateListComponent],
+    providers: [ExerciseService],
+    entryComponents: [CreateListComponent]
 })
 
 export class ExerciseListModule {

@@ -52,7 +52,7 @@ export class CreateExerciseComponent implements OnInit {
       console.log(this.exercise)
 
       this.exerciseService.addExercise(this.exercise)
-        .subscribe(hero => {
+        .subscribe(exercise => {
           console.log("added Success")
         });
     }
@@ -67,7 +67,7 @@ export class CreateExerciseComponent implements OnInit {
       return true
     }
 
-    if (!this.openQuestion && this.exercise.answers.length < 5) {
+    if (!this.openQuestion && this.exercise.answers.length < 4) {
       console.log('2')
       this.emptyFields = true
       return true

@@ -2,12 +2,12 @@ var path    = require('path');
 var db      = require('../db.js');
 var mysql   = require('mysql');
 var express     = require('express');
-var app         = express();
+//var app         = express();
 
 var bodyParser  = require('body-parser');
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
 
 module.exports = {
     getStudentById : function(req, res){

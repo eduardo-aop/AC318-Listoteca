@@ -8,6 +8,7 @@ import { ExerciseService } from './exercise.service';
 })
 export class ExerciseListComponent implements OnInit {
 
+  showModal = false;
   lists: any[] = [];
 
   constructor(private exerciseService: ExerciseService) { }
@@ -19,5 +20,9 @@ export class ExerciseListComponent implements OnInit {
 
   addExercise() {
     console.log('add');
+  }
+
+  openCreateListModal() {
+    this.showModal = !this.showModal;
   }
 }

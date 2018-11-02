@@ -9,7 +9,9 @@
 </div>
 
 <div class="fixed-action-btn">
-  <a routerLink="/exercise/add" class="btn-floating btn-large red" (click)="addExercise()">
+  <a class="btn-floating btn-large red" (click)="modal.open(component)">
     <i class="large material-icons">add</i>
   </a>
 </div>
+
+<app-create-list #modal></app-create-list>

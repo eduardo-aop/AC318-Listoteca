@@ -3,6 +3,35 @@ var db = require('../db.js');
 var mysql = require('mysql');
 
 module.exports = {
+    authTeacher : function(req, res){
+        var connection = mysql.createConnection(db.dbData);
+
+        var userName = req.body.name;
+        var password = req.body.password;
+        connection.connect(function(err) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            }
+            else {
+                console.log("Connected!");
+                var query = "SELECT * FROM teacher WHERE (userName = ? OR email = ?) AND password = ?";
+                connection.query(query, [userName, userName, password], function (err, result, fields) {
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(500);
+                    } else if (result.length == 0) {
+                        console.log('not found');
+                        res.sendStatus(404);
+                    } else {
+                        console.log(result);
+                        res.send(result);
+                    }
+                });
+                connection.end();
+            }
+        });
+    },
     getTeacherById : function(req, res){
         var connection = mysql.createConnection(db.dbData);
 

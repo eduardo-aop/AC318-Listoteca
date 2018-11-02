@@ -4,7 +4,7 @@ var dbData = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'listoteca',
+    database: 'ac318',
     port: '3307'
 };
 

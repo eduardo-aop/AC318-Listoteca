@@ -40,8 +40,8 @@ export class ExerciseService {
   }
 
   addExercise(exercise: Exercise): Observable<Exercise> {
-    this.url = this.url + "/exercise";
-    return this.http.post<Exercise>(this.url, exercise, httpOptions).pipe(
+    console.log(exercise)
+    return this.http.post<Exercise>(this.url + "/question", exercise, httpOptions).pipe(
       tap((exercise: Exercise) => console.log('Added'))
     );
   }
