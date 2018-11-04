@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     (this.user.password != '' && this.user.password != undefined)) {
       this.loginService.doLogin(this.user).subscribe(
         data => {
-            console.log("POST Request is successful ", data);
+            console.log("POST Request is successful => ", data[0]);
             if (data == null || data == undefined) {
               this.userNameError = true;
               this.emptyFields = false;
@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
               this.userNameError = false;
               this.loginService.setUserAuthentitated(true);
             }
+
+            localStorage.setItem("user", JSON.stringify(data[0]));
         },
         error => {
             console.log("Rrror", error);

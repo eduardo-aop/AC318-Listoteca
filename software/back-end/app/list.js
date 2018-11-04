@@ -5,7 +5,26 @@ var bodyParser = require('body-parser');
 
 module.exports = {
     getAllLists: function (req, res) {
+        var teacherId = req.query.teacherId;
+        var connection = mysql.createConnection(db.dbData);
 
+        connection.connect(function (err) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            } else {
+                var query = "SELECT * FROM list WHERE teacherId = ?";
+                connection.query(query, [teacherId], function (err, result, fields) {
+                    if (err) {
+                        res.sendStatus(500);
+                    } else {
+                        console.log(result);
+                        res.send(result);
+                    }
+                });
+                connection.end();
+            }
+        });
     },
     getListById: function (req, res) {
 
@@ -22,8 +41,7 @@ module.exports = {
             if (err) {
                 console.log(err);
                 res.sendStatus(500);
-            }
-            else {
+            } else {
                 console.log("Connected!");
                 var where = "subject = ?";
                 if (theme != '' && theme != undefined) {
@@ -39,7 +57,7 @@ module.exports = {
                         res.sendStatus(500);
                     } else {
                         console.log(result);
-                        var query = 'INSERT INTO list(name, subject, theme, teacher_id) values (?, ?, ?, ?)';
+                        var query = 'INSERT INTO list(name, subject, theme, teacherId) values (?, ?, ?, ?)';
                         connection.query(query, [name, subject, theme, teacherId], function (err, resultInsert, fields) {
                             if (err) {
                                 console.log(err);
@@ -60,7 +78,7 @@ module.exports = {
                                 }
 
                                 console.log(array);
-                                var query = 'INSERT INTO listHasExercise(exercise_id, list_id) values ?';
+                                var query = 'INSERT INTO listHasExercise(exerciseId, listId) values ?';
                                 connection.query(query, [array], function (err, resultInsert, fields) {
                                     if (err) {
                                         console.log(err);

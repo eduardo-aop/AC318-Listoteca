@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Exercise } from './exercise';
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable, throwError, of } from 'rxjs';
+import { tap, catchError, map } from 'rxjs/operators';
+import { List } from './list';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json',
+                            'responseType': 'text' })
 };
 
 @Injectable({
@@ -18,31 +20,40 @@ export class ExerciseService {
 
   constructor(private http: HttpClient) { }
 
-  getExercisesFromList() {
-    return [
-      { id: 0, question: "Testando", answers: ['123', '311', '555'] },
-      { id: 1, question: "Ja era", answers: ['123', '311', '555'] },
-      { id: 2, question: "Ja era", answers: ['123', '311', '555'] },
-      { id: 3, question: "Ja era", answers: ['123', '311', '555'] },
-      { id: 4, question: "Ja era", answers: ['123', '311', '555'] }
-    ];
+  getExercisesFromList(listId: number): Observable<Exercise[]> {
+    return this.http.get<Exercise[]>(this.url + '/questionList/' + listId);
   }
 
-  getExerciseList() {
-    return [
-      { id: 0, theme: "sei la", subject: 'comp grafica'},
-      { id: 1, theme: "qualquer coias", subject: 'compiladores'},
-      { id: 2, theme: "outra coisa", subject: 'SO'},
-      { id: 3, theme: "sei la mais o que", subject: 'BD'},
-      { id: 4, theme: "nada de mais", subject: 'Eng SW'},
-      { id: 5, theme: "eita sei la", subject: 'POO'}
-    ];
+  getExerciseList(): Observable<List[]> {
+    var currentUser = JSON.parse(localStorage.getItem('user'));
+    console.log(currentUser);
+    return this.http.get<List[]>(this.url + '/list?teacherId=' + currentUser.id);
   }
 
-  addExercise(exercise: Exercise): Observable<Exercise> {
-    console.log(exercise)
-    return this.http.post<Exercise>(this.url + "/question", exercise, httpOptions).pipe(
-      tap((exercise: Exercise) => console.log('Added'))
-    );
+  addExercise(exercise: Exercise): Observable<any> {
+    console.log("exercise");
+    return this.http.post(this.url + '/question', exercise, {
+      responseType: 'text',
+    });
+  }
+ 
+  /**
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }

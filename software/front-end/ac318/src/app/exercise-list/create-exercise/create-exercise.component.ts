@@ -17,6 +17,7 @@ export class CreateExerciseComponent implements OnInit {
 
   openQuestion = true
   emptyFields = false
+  savedSuccess = 0
 
   subjectControl = new FormControl();
   subjects: string[] = ['Compiladores', 'Sistema Operacional', 'Banco de Dados', 'Programação Orientada a Objetos'];
@@ -49,18 +50,29 @@ export class CreateExerciseComponent implements OnInit {
 
   add(): void {
     if (!this.hasEmptyFields()) {
-      console.log(this.exercise)
+      console.log(this.exercise);
 
-      this.exerciseService.addExercise(this.exercise)
-        .subscribe(exercise => {
-          console.log("added Success")
+      this.exerciseService.addExercise(this.exercise).subscribe(
+        (response) => {
+          console.log("success => " + response)
+          if (response == 'Created') {
+            this.savedSuccess = 1
+            this.exercise = new Exercise();
+          } else {
+            this.savedSuccess = -1
+          }
+        }, error => {
+          console.log("error => " + error)
+          this.savedSuccess = -1
         });
     }
   }
 
   hasEmptyFields() {
     console.log('0')
-    if (this.exercise.question == '' || this.exercise.subject == '' || this.exercise.theme == '') {
+    if (this.exercise.question == '' || this.exercise.question == undefined
+      || this.exercise.subject == '' || this.exercise.subject == undefined
+      || this.exercise.theme == '' || this.exercise.theme == undefined) {
       console.log('1')
 
       this.emptyFields = true

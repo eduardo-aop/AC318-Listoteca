@@ -1,3 +1,11 @@
+<div class="alert alert-success" role="alert" *ngIf="savedSuccess == 1">
+  Exercício salvo com sucesso!
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="savedSuccess == -1">
+  Falha ao salvar exercício. Tente Novamente!
+</div>
+
 <form>
   <p>
     <label>

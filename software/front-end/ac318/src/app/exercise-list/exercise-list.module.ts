@@ -33,9 +33,8 @@ import { CreateListComponent } from './create-list/create-list.component';
         CreateExerciseComponent,
         CreateListComponent
     ],
-    exports: [CreateListComponent],
-    providers: [ExerciseService],
-    entryComponents: [CreateListComponent]
+    exports: [],
+    providers: [ExerciseService]
 })
 
 export class ExerciseListModule {

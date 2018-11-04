@@ -14,7 +14,14 @@ export class ExerciseListComponent implements OnInit {
   constructor(private exerciseService: ExerciseService) { }
 
   ngOnInit() {
-    this.lists = this.exerciseService.getExerciseList();
+    this.exerciseService.getExerciseList().subscribe(
+      val => {
+        console.log(val);
+        this.lists = val;
+      }, 
+      error => {
+
+      });
     console.log(this.lists);
   }
 

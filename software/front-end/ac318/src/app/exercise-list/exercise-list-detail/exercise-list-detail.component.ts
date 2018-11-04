@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExerciseService } from '../exercise.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-exercise-list-detail',
@@ -9,11 +10,22 @@ import { ExerciseService } from '../exercise.service';
 export class ExerciseListDetailComponent implements OnInit {
 
   private exercises: any[] = [];
+  private listId;
 
-  constructor(private exerciseService: ExerciseService) { }
+  constructor(private route: ActivatedRoute, 
+    private exerciseService: ExerciseService) {
+
+     }
 
   ngOnInit() {
-    this.exercises = this.exerciseService.getExercisesFromList()
+    this.route.params.subscribe((params: any) => {
+      this.listId = params['id'];
+    });
+
+    this.exerciseService.getExercisesFromList(this.listId).subscribe(
+      response => {
+        this.exercises = response;
+      });
   }
 
 }

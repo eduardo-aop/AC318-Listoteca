@@ -29,10 +29,11 @@ router.route('/teacherp').post(teacher.updateTeacher);
 //problem
 router.route('/question/:id').get(question.getQuestionById);
 router.route('/question').get(question.getAllQuestions);
+router.route('/questionList/:listId').get(question.getAllQuestionsFromList);
 router.route('/question').post(question.saveQuestion);
 
-//router.route('/list').get(list.getAllLists);
-//router.route('/list/:id').get(list.getListById);
+router.route('/list').get(list.getAllLists);
+router.route('/list/:id').get(list.getListById);
 router.route('/list/').post(list.generateList);
 
 router.get('/', function(req, res) {
