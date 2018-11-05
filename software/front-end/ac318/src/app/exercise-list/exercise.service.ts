@@ -36,7 +36,15 @@ export class ExerciseService {
       responseType: 'text',
     });
   }
+
+  loadExerciseClasses(text: string): Observable<any[]> {
+    return this.http.get<any[]>(this.url + '/class/' + text);
+  }
  
+  loadExerciseThemes(text: string): Observable<any[]> {
+    return this.http.get<any[]>(this.url + '/theme/' + text);
+  }
+
   /**
    * Handle Http operation that failed.
    * Let the app continue.

@@ -31,7 +31,7 @@
     <div class="example-form">
       <mat-form-field class="example-full-width">
         <input [(ngModel)]="exercise.subject" type="text" placeholder="Matéria" aria-label="Assignee" matInput
-          [formControl]="subjectControl" [matAutocomplete]="subject">
+          [formControl]="subjectControl" [matAutocomplete]="subject" (input)="onInputSubjectsChange($event.target.value)">
         <mat-autocomplete #subject="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let subject of filteredSubjects | async" [value]="subject">
             {{ subject }}
@@ -42,7 +42,7 @@
     <div class="example-form">
       <mat-form-field class="example-full-width">
         <input [(ngModel)]="exercise.theme" type="text" placeholder="Tema" aria-label="Assignee" matInput [formControl]="themeControl"
-          [matAutocomplete]="theme">
+          [matAutocomplete]="theme" (input)="onInputThemesChange($event.target.value)">
         <mat-autocomplete #theme="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let theme of filteredThemes | async" [value]="theme">
             {{ theme }}

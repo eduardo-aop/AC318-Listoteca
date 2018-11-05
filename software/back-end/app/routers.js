@@ -30,6 +30,8 @@ router.route('/teacherp').post(teacher.updateTeacher);
 router.route('/question/:id').get(question.getQuestionById);
 router.route('/question').get(question.getAllQuestions);
 router.route('/questionList/:listId').get(question.getAllQuestionsFromList);
+router.route('/class/:text').get(question.getClassFromQuestion);
+router.route('/theme/:text').get(question.getThemeFromQuestion);
 router.route('/question').post(question.saveQuestion);
 
 router.route('/list').get(list.getAllLists);

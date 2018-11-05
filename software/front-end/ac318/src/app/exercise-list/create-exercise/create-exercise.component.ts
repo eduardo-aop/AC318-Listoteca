@@ -30,18 +30,7 @@ export class CreateExerciseComponent implements OnInit {
   constructor(private exerciseService: ExerciseService) { }
 
   ngOnInit() {
-    this.exercise.answers = []
-    this.filteredSubjects = this.subjectControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filterSubject(this.subjects, value))
-      );
-
-    this.filteredThemes = this.themeControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filterTheme(this.themes, value))
-      );
+    this.exercise.answers = [];
   }
 
   setOpenQuestion(open: boolean) {
@@ -66,6 +55,60 @@ export class CreateExerciseComponent implements OnInit {
           this.savedSuccess = -1
         });
     }
+  }
+
+  onInputSubjectsChange(searchValue: string) {
+    if (searchValue.length == 3) {
+      this.loadClasses(searchValue);
+    }
+  }
+
+  onInputThemesChange(searchValue: string) {
+    if (searchValue.length == 3) {
+      this.loadThemes(searchValue);
+    }
+  }
+
+  loadClasses(text: string) {
+    this.exerciseService.loadExerciseClasses(text).subscribe(
+      resp => {
+        //convert json to array
+        var array = [];
+        var i;
+        for (i = 0; i < resp.length; i++) {
+          array[i] = resp[i].subject;
+        }
+        this.subjects = array;
+        this.filteredSubjects = this.subjectControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterSubject(this.subjects, value))
+          );
+        console.log(resp);
+        console.log(array);
+      }
+    )
+  }
+
+  loadThemes(text: string) {
+    this.exerciseService.loadExerciseThemes(text).subscribe(
+      resp => {
+        //convert json to array
+        var array = [];
+        var i;
+        for (i = 0; i < resp.length; i++) {
+          array[i] = resp[i].theme;
+        }
+        this.themes = array;
+        this.filteredThemes = this.themeControl.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterTheme(this.themes, value))
+          );
+        console.log(resp);
+        console.log(array);
+      }
+    )
   }
 
   hasEmptyFields() {

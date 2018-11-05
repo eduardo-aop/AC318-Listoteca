@@ -94,15 +94,67 @@ module.exports = {
             }
         });
     },
-    saveQuestion: function (req, res) {
+    getClassFromQuestion: function (req, res) {
+        var text = '%' + req.params.text + '%';
         var connection = mysql.createConnection(db.dbData);
 
+        connection.connect(function (err) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            }
+            else {
+                console.log("Connected!");
+                var query = "SELECT DISTINCT(subject) FROM exercise WHERE subject LIKE ?";
+
+                connection.query(query, [text], function (err, result, fields) {
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(500);
+                    } else {
+                        console.log(result);
+                        res.send(result);
+                    }
+                });
+                connection.end();
+            }
+        });
+    },
+    getThemeFromQuestion: function (req, res) {
+        var text = '%' + req.params.text + '%';
+        var connection = mysql.createConnection(db.dbData);
+
+        connection.connect(function (err) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            }
+            else {
+                console.log("Connected!");
+                var query = "SELECT DISTINCT(theme) FROM exercise WHERE theme LIKE ?";
+
+                connection.query(query, [text], function (err, result, fields) {
+                    if (err) {
+                        console.log(err);
+                        res.sendStatus(500);
+                    } else {
+                        console.log(result);
+                        res.send(result);
+                    }
+                });
+                connection.end();
+            }
+        });
+    },
+    saveQuestion: function (req, res) {
         var question = req.body.question;
         var subject = req.body.subject;
         var theme = req.body.theme;
         var answers = req.body.answers;
 
         console.log(req.body);
+        var connection = mysql.createConnection(db.dbData);
+
         connection.connect(function (err) {
             var query = "INSERT INTO exercise(question, subject, theme) VALUES (?, ?, ?)";
             connection.query(query, [question, subject, theme], function (err, result, fields) {
