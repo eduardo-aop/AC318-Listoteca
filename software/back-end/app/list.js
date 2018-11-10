@@ -35,6 +35,8 @@ module.exports = {
         var theme = req.body.theme;
         var name = req.body.name;
 
+        console.log(req.body)
+
         var connection = mysql.createConnection(db.dbData);
 
         connection.connect(function (err) {
@@ -49,12 +51,15 @@ module.exports = {
                 }
                 var query = 'SELECT * FROM (SELECT id FROM exercise WHERE ' + where + ' ORDER BY RAND() LIMIT 10) T1 ORDER BY id';
 
+                console.log(query)
+                console.log(where)
                 connection.query(query, [subject, theme], function (err, result, fields) {
                     if (err) {
                         console.log(err);
                         res.sendStatus(500);
                     } else if (result.length == 0) {
-                        res.sendStatus(500);
+                        console.log('ta vazio');
+                        res.sendStatus(400);
                     } else {
                         console.log(result);
                         var query = 'INSERT INTO list(name, subject, theme, teacherId) values (?, ?, ?, ?)';

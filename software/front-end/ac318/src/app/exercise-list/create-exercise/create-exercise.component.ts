@@ -20,11 +20,11 @@ export class CreateExerciseComponent implements OnInit {
   savedSuccess = 0
 
   subjectControl = new FormControl();
-  subjects: string[] = ['Compiladores', 'Sistema Operacional', 'Banco de Dados', 'Programação Orientada a Objetos'];
+  subjects: string[] = [];
   filteredSubjects: Observable<string[]>;
 
   themeControl = new FormControl();
-  themes: string[] = ['Regex', 'ACID', 'Herança'];
+  themes: string[] = [];
   filteredThemes: Observable<string[]>;
 
   constructor(private exerciseService: ExerciseService) { }

@@ -1,8 +1,13 @@
+<div class="alert alert-success" role="alert" *ngIf="savedSuccess == 1">
+  Lista gerada com sucesso!
+</div>
+
 <div *ngFor='let list of lists'>
   <div class="card">
-    <h5 class="card-header">{{ list.subject }}</h5>
+    <h5 class="card-header">{{ list.name }}</h5>
     <div class="card-body">
-      <h5 class="card-title">{{ list.theme }}</h5>
+      <h5 class="card-title">{{ list.subject }}</h5>
+      <p class="card-text">{{ list.theme }}</p>
       <a [routerLink]="['/exercise', list.id]" class="btn btn-primary blue">Ver lista</a>
     </div>
   </div>
@@ -10,6 +15,6 @@
 
 <div class="fixed-action-btn">
   <a class="btn-floating btn-large red">
-    <i class="large material-icons">add</i>
+    <i (click)="openDialog()" class="large material-icons">add</i>
   </a>
 </div>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule, MatAutocompleteModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule, MatAutocompleteModule, MatDialogModule, MatSnackBarModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -23,6 +23,8 @@ import { CreateListComponent } from './create-list/create-list.component';
         MatInputModule,
         MatRippleModule,
         MatAutocompleteModule,
+        MatDialogModule,
+        MatSnackBarModule,
         ExerciseRoutingModule,
         HttpClientModule
     ],
@@ -33,8 +35,9 @@ import { CreateListComponent } from './create-list/create-list.component';
         CreateExerciseComponent,
         CreateListComponent
     ],
-    exports: [],
-    providers: [ExerciseService]
+    exports: [ExerciseListComponent],
+    providers: [ExerciseService],
+    entryComponents: [CreateListComponent]
 })
 
 export class ExerciseListModule {

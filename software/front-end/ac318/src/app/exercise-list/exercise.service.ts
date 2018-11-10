@@ -37,6 +37,13 @@ export class ExerciseService {
     });
   }
 
+  generateList(list: any): Observable<any> {
+    console.log("exercise");
+    return this.http.post(this.url + '/list', list, {
+      responseType: 'text',
+    });
+  }
+
   loadExerciseClasses(text: string): Observable<any[]> {
     return this.http.get<any[]>(this.url + '/class/' + text);
   }
