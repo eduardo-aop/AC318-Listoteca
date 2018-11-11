@@ -24,7 +24,7 @@ export class ExerciseService {
     return this.http.get<Exercise[]>(this.url + '/questionList/' + listId);
   }
 
-  getExerciseList(): Observable<List[]> {
+  getAllList(): Observable<List[]> {
     var currentUser = JSON.parse(localStorage.getItem('user'));
     console.log(currentUser);
     return this.http.get<List[]>(this.url + '/list?teacherId=' + currentUser.id);
@@ -40,6 +40,20 @@ export class ExerciseService {
   generateList(list: any): Observable<any> {
     console.log("exercise");
     return this.http.post(this.url + '/list', list, {
+      responseType: 'text',
+    });
+  }
+
+  updateListName(list: any): Observable<any> {
+    console.log("exercise");
+    return this.http.put(this.url + '/list/', list, {
+      responseType: 'text',
+    });
+  }
+
+  deleteList(id: number): Observable<any> {
+    console.log("exercise");
+    return this.http.delete(this.url + '/list/' + id, {
       responseType: 'text',
     });
   }

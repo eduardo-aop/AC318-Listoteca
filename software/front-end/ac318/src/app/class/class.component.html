@@ -1,9 +1,0 @@
-<div *ngFor='let class of classes'>
-    <div class="card">
-      <h5 class="card-header">{{ class.subject }}</h5>
-      <div class="card-body">
-        <h5 class="card-title">Professor: {{ class.teacher }}</h5>
-        <a [routerLink]="['/class', class.id]" class="btn btn-primary blue">Ver todos exercícios</a>
-      </div>
-    </div>
-  </div>

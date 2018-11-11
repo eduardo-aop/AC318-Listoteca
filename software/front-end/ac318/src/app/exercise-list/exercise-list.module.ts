@@ -7,11 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ExerciseListComponent } from './exercise-list.component'
 import { ExerciseRoutingModule } from './exercise.routing';
-import { ExerciseComponent } from './exercise/exercise.component';
 import { ExerciseListDetailComponent } from './exercise-list-detail/exercise-list-detail.component';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { ExerciseService } from './exercise.service';
 import { CreateListComponent } from './create-list/create-list.component';
+import { UpdateExerciseListComponent } from './update-exercise-list/update-exercise-list.component';
 
 @NgModule({
     imports: [
@@ -30,14 +30,14 @@ import { CreateListComponent } from './create-list/create-list.component';
     ],
     declarations: [
         ExerciseListComponent,
-        ExerciseComponent,
         ExerciseListDetailComponent,
         CreateExerciseComponent,
-        CreateListComponent
+        CreateListComponent,
+        UpdateExerciseListComponent
     ],
     exports: [ExerciseListComponent],
     providers: [ExerciseService],
-    entryComponents: [CreateListComponent]
+    entryComponents: [CreateListComponent, UpdateExerciseListComponent]
 })
 
 export class ExerciseListModule {

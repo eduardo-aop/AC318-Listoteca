@@ -26,8 +26,50 @@ module.exports = {
             }
         });
     },
-    getListById: function (req, res) {
+    deleteList: function (req, res) {
+        var listId = req.params.id;
+        var connection = mysql.createConnection(db.dbData);
 
+        connection.connect(function (err) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            } else {
+                var query = "DELETE FROM list WHERE id = ?";
+                connection.query(query, [listId], function (err, result, fields) {
+                    if (err) {
+                        res.sendStatus(500);
+                    } else {
+                        console.log(result);
+                        res.send(result);
+                    }
+                });
+                connection.end();
+            }
+        });
+    },
+    renameList: function (req, res) {
+        var listId = req.body.id;
+        var name = req.body.name;
+        var connection = mysql.createConnection(db.dbData);
+
+        connection.connect(function (err) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(500);
+            } else {
+                var query = "UPDATE list SET name = ? WHERE id = ?";
+                connection.query(query, [name, listId], function (err, result, fields) {
+                    if (err) {
+                        res.sendStatus(500);
+                    } else {
+                        console.log(result);
+                        res.send(result);
+                    }
+                });
+                connection.end();
+            }
+        });
     },
     generateList: function (req, res) {
         var teacherId = req.body.teacherId;

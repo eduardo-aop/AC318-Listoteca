@@ -1,0 +1,14 @@
+.header {
+    text-align: center;
+}
+.list-title {
+    float: left;
+}
+.list-remove, .list-edit {
+    position: relative;
+    float: right;
+    top: 20%;
+}
+.list-edit {
+    margin-right: 10px
+}

@@ -10,11 +10,6 @@ import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
   { 
-    path: 'class', 
-    loadChildren: './class/class.module#ClassModule', 
-    canActivate: [AuthGuard] 
-  },
-  { 
     path: '', 
     component: HomeComponent,
     canActivate: [AuthGuard] 

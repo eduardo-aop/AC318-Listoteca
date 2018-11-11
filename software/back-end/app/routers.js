@@ -35,8 +35,9 @@ router.route('/theme/:text').get(question.getThemeFromQuestion);
 router.route('/question').post(question.saveQuestion);
 
 router.route('/list').get(list.getAllLists);
-router.route('/list/:id').get(list.getListById);
 router.route('/list/').post(list.generateList);
+router.route('/list/:id').delete(list.deleteList);
+router.route('/list/:id').put(list.renameList);
 
 router.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, '../../front-end/index.html'));

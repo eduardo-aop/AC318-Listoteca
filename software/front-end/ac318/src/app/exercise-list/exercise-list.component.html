@@ -1,10 +1,14 @@
-<div class="alert alert-success" role="alert" *ngIf="savedSuccess == 1">
-  Lista gerada com sucesso!
-</div>
-
 <div *ngFor='let list of lists'>
   <div class="card">
-    <h5 class="card-header">{{ list.name }}</h5>
+    <div class="card-header header">
+      <h5 class="list-title">{{ list.name }}</h5>
+      <a (click)="deleteList(list.id)" class="waves-effect waves-light btn transparent list-remove">
+        <i class="material-icons">close</i>
+      </a>
+      <a (click)="updateName(list.id)" class="waves-effect waves-light btn transparent list-edit">
+        <i class="material-icons">edit</i>
+      </a>
+    </div>
     <div class="card-body">
       <h5 class="card-title">{{ list.subject }}</h5>
       <p class="card-text">{{ list.theme }}</p>
