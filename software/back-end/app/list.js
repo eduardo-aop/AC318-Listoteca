@@ -49,6 +49,7 @@ module.exports = {
         });
     },
     renameList: function (req, res) {
+        console.log('tentou renomear');
         var listId = req.body.id;
         var name = req.body.name;
         var connection = mysql.createConnection(db.dbData);

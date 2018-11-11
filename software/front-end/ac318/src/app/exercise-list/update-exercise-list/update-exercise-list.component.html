@@ -1,3 +1,10 @@
-<p>
-  update-exercise-list works!
-</p>
+<h1 mat-dialog-title>Renomear Lista</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <input matInput [(ngModel)]="listName" placeholder="Nome">
+      </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close="" cdkFocusInitial>Cancelar</button>
+  <button mat-button [mat-dialog-close]="listName" cdkFocusInitial>Ok</button>
+</div>

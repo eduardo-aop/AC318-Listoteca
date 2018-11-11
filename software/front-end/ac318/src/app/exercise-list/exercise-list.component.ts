@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExerciseService } from './exercise.service';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { CreateListComponent } from './create-list/create-list.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { UpdateExerciseListComponent } from './update-exercise-list/update-exercise-list.component';
@@ -47,27 +47,34 @@ export class ExerciseListComponent implements OnInit {
     });
   }
 
-  updateName(id: number) {
-    const dialogRef = this.dialog.open(UpdateExerciseListComponent);
+  updateName(id: number, name: string) {
+    console.log('foiw');
+    const dialogRef = this.dialog.open(UpdateExerciseListComponent, {
+      data: {
+        name: name
+      }
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       if (result != undefined && result != '') {
-        var list = {
-          id: id,
-          name: result
-        }
-        this.exerciseService.updateListName(list).subscribe(
-          response => {
-            console.log('updated');
-            this.loadList();
-            this.openSnackBar("Lista renomeada com sucesso!", "", 3000)
-          },
-          error => {
-            console.log('error in update ' + error);
-            this.openSnackBar("Falha ao renomear lista!", "", 3000)
+        if (result != name) {
+          var list = {
+            id: id,
+            name: result
           }
-        )
+          this.exerciseService.updateListName(list).subscribe(
+            response => {
+              console.log('updated');
+              this.loadList();
+              this.openSnackBar("Lista renomeada com sucesso!", "", 3000)
+            },
+            error => {
+              console.log('error in update ' + error);
+              this.openSnackBar("Falha ao renomear lista!", "", 3000)
+            }
+          )
+        }
       }
     });
   }

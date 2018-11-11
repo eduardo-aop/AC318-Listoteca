@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { ExerciseService } from '../exercise.service';
 
 @Component({
   selector: 'app-update-exercise-list',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateExerciseListComponent implements OnInit {
 
-  constructor() { }
+  listName: any = '';
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+    this.listName = this.data.name;
   }
 
 }
