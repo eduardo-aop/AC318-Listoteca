@@ -37,6 +37,22 @@ export class CreateListComponent implements OnInit {
     console.log("opened");
   }
 
+  validatedFields() {
+    if (this.listName.length < 5 || this.listName.length > 50) {
+      this.openSnackBar("O campo nome deve conter no mínimo 5 caracteres e no máximo 50", "", 3000)
+      return false;
+    }
+    if (this.listSubject.length < 5 || this.listSubject.length > 50) {
+      this.openSnackBar("O campo assunto deve conter no mínimo 5 caracteres e no máximo 50", "", 3000)
+      return false;
+    }
+    if (this.listTheme != '' && (this.listTheme.length < 5 || this.listTheme.length > 50)) {
+      this.openSnackBar("O campo tema deve conter no mínimo 5 caracteres e no máximo 50", "", 3000)
+      return false;
+    }
+    return true;
+  }
+
   hasEmptyFields() {
     if (this.listName == undefined || this.listName == ''
       || this.listSubject == undefined || this.listSubject == '') {
@@ -48,30 +64,36 @@ export class CreateListComponent implements OnInit {
 
   generateList() {
     if (!this.hasEmptyFields()) {
-      this.emptyFields = false
-      this.formIsValid = true
-      var list = {
-        teacherId: this.currentUser.id,
-        name: this.listName,
-        subject: this.listSubject,
-        theme: this.listTheme
-      }
-
-      this.exerciseService.generateList(list).subscribe(
-        response => {
-          console.log('lista gerada');
-          this.openSnackBar("Nova lista gerada com sucesso", "", 3000)
-          this.dialogRef.close(true)
-        },
-        error => {
-          console.log('deu ruim ' + error.status);
-          if (error.status == 400) {
-            this.openSnackBar("Não há exercícios com essa Matéria e Tema simultâneamente!", "", 5000)
-          } else {
-            this.openSnackBar("Falha ao gerar uma nova Lista", "", 5000)
-          }
+      if (this.validatedFields()) {
+        this.emptyFields = false
+        this.formIsValid = true
+        var list = {
+          teacherId: this.currentUser.id,
+          name: this.listName,
+          subject: this.listSubject,
+          theme: this.listTheme
         }
-      )
+
+        this.exerciseService.generateList(list).subscribe(
+          response => {
+            console.log('lista gerada');
+            this.openSnackBar("Nova lista gerada com sucesso", "", 3000)
+            this.dialogRef.close(true)
+          },
+          error => {
+            console.log('deu ruim ' + error.status);
+            if (error.status == 400) {
+              if (this.listTheme == '') {
+                this.openSnackBar("Não há exercícios com essa Matéria!", "", 5000)
+              } else {
+                this.openSnackBar("Não há exercícios com essa Matéria e Tema simultâneamente!", "", 5000)
+              }
+            } else {
+              this.openSnackBar("Falha ao gerar uma nova Lista", "", 5000)
+            }
+          }
+        )
+      }
     } else {
       this.openSnackBar("Os campos Nome e Matéria são obrigatórios!", "", 5000)
       this.emptyFields = true

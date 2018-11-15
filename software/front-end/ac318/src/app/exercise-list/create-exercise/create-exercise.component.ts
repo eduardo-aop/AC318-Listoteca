@@ -15,9 +15,10 @@ export class CreateExerciseComponent implements OnInit {
 
   private exercise: Exercise = new Exercise()
 
-  openQuestion = true
-  emptyFields = false
-  savedSuccess = 0
+  openQuestion = true;
+  emptyFields = false;
+  savedSuccess = 0;
+  validateFieldMessage = null;
 
   subjectControl = new FormControl();
   subjects: string[] = [];
@@ -39,21 +40,24 @@ export class CreateExerciseComponent implements OnInit {
 
   add(): void {
     if (!this.hasEmptyFields()) {
-      console.log(this.exercise);
+      if (this.fieldsValidated()) {
+        console.log(this.exercise);
 
-      this.exerciseService.addExercise(this.exercise).subscribe(
-        (response) => {
-          console.log("success => " + response)
-          if (response == 'Created') {
-            this.savedSuccess = 1
-            this.exercise = new Exercise();
-          } else {
+        this.exerciseService.addExercise(this.exercise).subscribe(
+          (response) => {
+            console.log("success => " + response)
+            if (response == 'Created') {
+              this.savedSuccess = 1
+              this.exercise = new Exercise();
+              this.exercise.answers = []
+            } else {
+              this.savedSuccess = -1
+            }
+          }, error => {
+            console.log("error => " + error)
             this.savedSuccess = -1
-          }
-        }, error => {
-          console.log("error => " + error)
-          this.savedSuccess = -1
-        });
+          });
+      }
     }
   }
 
@@ -111,8 +115,43 @@ export class CreateExerciseComponent implements OnInit {
     )
   }
 
+  fieldsValidated() {
+    if (this.exercise.question.length < 5 || this.exercise.question.length > 50) {
+      this.validateFieldMessage = "O campo questão deve conter no mínimo 5 caracteres e no máximo 50";
+      return false;
+    }
+    if (this.exercise.subject.length < 5 || this.exercise.subject.length > 50) {
+      this.validateFieldMessage = "O campo assunto deve conter no mínimo 5 caracteres e no máximo 50";
+      return false;
+    }
+    if (this.exercise.theme.length < 5 || this.exercise.theme.length > 50) {
+      this.validateFieldMessage = "O campo tema deve conter no mínimo 5 caracteres e no máximo 50";
+      return false;
+    }
+
+    if (!this.openQuestion) {
+      if (this.exercise.answers[0].length < 5 || this.exercise.answers[0].length > 50) {
+        this.validateFieldMessage = "O campo primeira alternativa deve conter no mínimo 5 caracteres e no máximo 50";
+        return false;
+      }
+      if (this.exercise.answers[1].length < 5 || this.exercise.answers[1].length > 50) {
+        this.validateFieldMessage = "O campo segunda alternativa deve conter no mínimo 5 caracteres e no máximo 50";
+        return false;
+      }
+      if (this.exercise.answers[2].length < 5 || this.exercise.answers[2].length > 50) {
+        this.validateFieldMessage = "O campo terceira alternativa deve conter no mínimo 5 caracteres e no máximo 50";
+        return false;
+      }
+      if (this.exercise.answers[3].length < 5 || this.exercise.answers[3].length > 50) {
+        this.validateFieldMessage = "O campo qurta alternativa deve conter no mínimo 5 caracteres e no máximo 50";
+        return false;
+      }
+    }
+    this.validateFieldMessage = null;
+    return true;
+  }
+
   hasEmptyFields() {
-    console.log('0')
     if (this.exercise.question == '' || this.exercise.question == undefined
       || this.exercise.subject == '' || this.exercise.subject == undefined
       || this.exercise.theme == '' || this.exercise.theme == undefined) {

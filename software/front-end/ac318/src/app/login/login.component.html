@@ -1,18 +1,18 @@
-<div class="jumbotron">
+<!--<div class="jumbotron">
   <div class="row">
     <div class="input-field col s6">
       <input id="user" name="user" [(ngModel)]="user.name" type="text" class="validate" required>
       <label class="active" for="user">Usuário</label>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="input-field col s6">
       <input id="password" name="password" [(ngModel)]="user.password" type="password" class="validate" required>
       <label class="active" for="password">Senha</label>
     </div>
   </div>
-  
+
   <div *ngIf="userNameError" class="alert alert-danger" role="alert">
     Usuário e/ou senha incorretos!
   </div>
@@ -22,4 +22,27 @@
   <button class="btn waves-effect waves-light blue" type="submit" (click)="doLogin()">Login
     <i class="material-icons right">send</i>
   </button>
-</div>
+</div>-->
+
+<form>
+  <div class="group row input-field col s6">
+    <input id="user" name="user" [(ngModel)]="user.name" type="text" class="validate" required>
+    <label class="active" for="user">Usuário</label>
+  </div>
+  <div class="group row input-field col s6">
+    <input id="password" name="password" [(ngModel)]="user.password" type="password" class="validate" required>
+    <label class="active" for="password">Senha</label>
+  </div>
+  <div *ngIf="userNameError" class="alert alert-danger" role="alert">
+    Usuário e/ou senha incorretos!
+  </div>
+  <div *ngIf="emptyFields" class="alert alert-danger" role="alert">
+    Preencha todos os campos!
+  </div>
+  <button mat-button class="button buttonBlue" (click)="doLogin()">Login</button>
+
+</form>
+
+<!--<footer><a href="http://www.polymer-project.org/" target="_blank"><img src="https://www.polymer-project.org/images/logos/p-logo.svg"></a>
+  <p>You Gotta Love <a href="http://www.polymer-project.org/" target="_blank">Google</a></p>
+</footer>-->
