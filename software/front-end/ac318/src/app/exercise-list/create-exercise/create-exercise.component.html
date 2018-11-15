@@ -1,89 +1,91 @@
-<div class="alert alert-success" role="alert" *ngIf="savedSuccess == 1">
-  Exercício salvo com sucesso!
-</div>
-
-<div class="alert alert-danger" role="alert" *ngIf="savedSuccess == -1">
-  Falha ao salvar exercício. Tente Novamente!
-</div>
-
-<form>
-  <p>
-    <label>
-      <input class="with-gap" name="group1" type="radio" (click)="setOpenQuestion(true)" checked />
-      <span>Aberta</span>
-    </label>
-  </p>
-  <p>
-    <label>
-      <input class="with-gap" name="group1" type="radio" (click)="setOpenQuestion(false)" />
-      <span>Fechada</span>
-    </label>
-  </p>
-</form>
-<div class="row">
-  <div class="example-form">
-    <div class="example-full-width">
-      <div class="input-field">
-        <input id="question" name="question" [(ngModel)]="exercise.question" type="text" class="validate">
-        <label for="question">Pergunta</label>
-      </div>
-    </div>
-    <div class="example-form">
-      <mat-form-field class="example-full-width">
-        <input [(ngModel)]="exercise.subject" type="text" placeholder="Matéria" aria-label="Assignee" matInput
-          [formControl]="subjectControl" [matAutocomplete]="subject" (input)="onInputSubjectsChange($event.target.value)">
-        <mat-autocomplete #subject="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let subject of filteredSubjects | async" [value]="subject">
-            {{ subject }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-    <div class="example-form">
-      <mat-form-field class="example-full-width">
-        <input [(ngModel)]="exercise.theme" type="text" placeholder="Tema" aria-label="Assignee" matInput [formControl]="themeControl"
-          [matAutocomplete]="theme" (input)="onInputThemesChange($event.target.value)">
-        <mat-autocomplete #theme="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let theme of filteredThemes | async" [value]="theme">
-            {{ theme }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </div>
-    <div *ngIf='!openQuestion'>
-      <div class="row">
-        <div class="input-field col s12">
-          <input [(ngModel)]="exercise.answers[0]" id="first" type="text" class="validate">
-          <label for="first">Primeira Alternativa</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input [(ngModel)]="exercise.answers[1]" id="second" type="text" class="validate">
-          <label for="second">Segunda Alternativa</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input [(ngModel)]="exercise.answers[2]" id="third" type="text" class="validate">
-          <label for="third">Terceira Alternativa</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input [(ngModel)]="exercise.answers[3]" id="fourth" type="text" class="validate">
-          <label for="fourth">Quarta Alternativa</label>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="emptyFields" class="alert alert-danger" role="alert">
-      Preencha todos os campos!
-    </div>
-    <div *ngIf="validateFieldMessage" class="alert alert-danger" role="alert">
-      {{ validateFieldMessage }}
-    </div>
-    <button mat-button class="button buttonBlue" (click)="add()">Salvar
-      <i class="material-icons right">save</i>
-    </button>
+<mat-card>
+  <div class="alert alert-success" role="alert" *ngIf="savedSuccess == 1">
+    Exercício salvo com sucesso!
   </div>
-</div>
+
+  <div class="alert alert-danger" role="alert" *ngIf="savedSuccess == -1">
+    Falha ao salvar exercício. Tente Novamente!
+  </div>
+
+  <form>
+    <p>
+      <label>
+        <input class="with-gap" name="group1" type="radio" (click)="setOpenQuestion(true)" checked />
+        <span>Aberta</span>
+      </label>
+    </p>
+    <p>
+      <label>
+        <input class="with-gap" name="group1" type="radio" (click)="setOpenQuestion(false)" />
+        <span>Fechada</span>
+      </label>
+    </p>
+  </form>
+  <div class="row">
+    <div class="example-form">
+      <div class="example-full-width">
+        <div class="input-field">
+          <input id="question" name="question" [(ngModel)]="exercise.question" type="text" class="validate">
+          <label for="question">Pergunta</label>
+        </div>
+      </div>
+      <div class="example-form">
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="exercise.subject" type="text" placeholder="Matéria" aria-label="Assignee" matInput
+            [formControl]="subjectControl" [matAutocomplete]="subject" (input)="onInputSubjectsChange($event.target.value)">
+          <mat-autocomplete #subject="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let subject of filteredSubjects | async" [value]="subject">
+              {{ subject }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div class="example-form">
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="exercise.theme" type="text" placeholder="Tema" aria-label="Assignee" matInput
+            [formControl]="themeControl" [matAutocomplete]="theme" (input)="onInputThemesChange($event.target.value)">
+          <mat-autocomplete #theme="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let theme of filteredThemes | async" [value]="theme">
+              {{ theme }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div *ngIf='!openQuestion'>
+        <div class="row">
+          <div class="input-field col s12">
+            <input [(ngModel)]="exercise.answers[0]" id="first" type="text" class="validate">
+            <label for="first">Primeira Alternativa</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input [(ngModel)]="exercise.answers[1]" id="second" type="text" class="validate">
+            <label for="second">Segunda Alternativa</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input [(ngModel)]="exercise.answers[2]" id="third" type="text" class="validate">
+            <label for="third">Terceira Alternativa</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input [(ngModel)]="exercise.answers[3]" id="fourth" type="text" class="validate">
+            <label for="fourth">Quarta Alternativa</label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="emptyFields" class="alert alert-danger" role="alert">
+        Preencha todos os campos!
+      </div>
+      <div *ngIf="validateFieldMessage" class="alert alert-danger" role="alert">
+        {{ validateFieldMessage }}
+      </div>
+      <button mat-button class="button buttonBlue" (click)="add()">Salvar
+        <i class="material-icons right">save</i>
+      </button>
+    </div>
+  </div>
+</mat-card>

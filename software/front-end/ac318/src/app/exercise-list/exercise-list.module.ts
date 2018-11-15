@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule, MatAutocompleteModule, MatDialogModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatInputModule, MatRippleModule, MatAutocompleteModule, MatDialogModule, MatCardModule, MatSnackBarModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,6 +25,7 @@ import { UpdateExerciseListComponent } from './update-exercise-list/update-exerc
         MatAutocompleteModule,
         MatDialogModule,
         MatSnackBarModule,
+        MatCardModule,
         ExerciseRoutingModule,
         HttpClientModule
     ],
