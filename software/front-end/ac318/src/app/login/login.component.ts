@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem("user", JSON.stringify(data[0]));
         },
         error => {
-            console.log("Rrror", error);
+            console.log("Error", error);
             this.userNameError = true;
             this.emptyFields = false;
         })
