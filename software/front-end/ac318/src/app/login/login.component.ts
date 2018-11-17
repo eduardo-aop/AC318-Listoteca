@@ -30,13 +30,11 @@ export class LoginComponent implements OnInit {
             if (data == null || data == undefined) {
               this.userNameError = true;
               this.emptyFields = false;
-              this.loginService.setUserAuthentitated(false);
+              this.loginService.setUserAuthentitated(false, null);
             } else {
               this.userNameError = false;
-              this.loginService.setUserAuthentitated(true);
+              this.loginService.setUserAuthentitated(true, JSON.stringify(data[0]));
             }
-
-            localStorage.setItem("user", JSON.stringify(data[0]));
         },
         error => {
             console.log("Error", error);

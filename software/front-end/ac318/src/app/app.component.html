@@ -11,11 +11,19 @@
   </div>
 </nav>
 
-<mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="">Home</button>
-  <button mat-menu-item routerLink="exercise">Lista de Exercícios</button>
-  <button mat-menu-item routerLink="exercise/add">Elaborar Exercício</button>
-  <button mat-menu-item (click)="logout()">Sair</button>
+<mat-menu #menu="matMenu" overlapTrigger="false">
+  <div class="group row col s6">
+    <button mat-button routerLink="">Home</button>
+  </div>
+  <div class="group row col s6">
+    <button mat-button routerLink="exercise">Lista de Exercícios</button>
+  </div>
+  <div class="group row col s6">
+    <button mat-button routerLink="exercise/add">Elaborar Exercício</button>
+  </div>
+  <div class="group row col s6">
+    <button mat-button (click)="logout()">Sair</button>
+  </div>
 </mat-menu>
 
 <div class="container">

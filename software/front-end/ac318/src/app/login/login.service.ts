@@ -32,14 +32,14 @@ export class LoginService {
   }
 
   doLogout() {
-    this.setUserAuthentitated(false);
+    this.setUserAuthentitated(false, null);
   }
 
   userIsAuthenticated() {
     return this.userAuthenticated;
   }
 
-  setUserAuthentitated(authentitated: boolean) {
+  setUserAuthentitated(authentitated: boolean, user: any) {
     this.userAuthenticated = authentitated;
     this.showNavBarEmitter.emit(authentitated);
 
@@ -48,5 +48,6 @@ export class LoginService {
     } else {
       this.router.navigate(['/login']);
     }
+    localStorage.setItem("user", user);
   }
 }
