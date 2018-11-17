@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { List } from './list';
+import { Constants } from '../constants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json',
@@ -16,7 +17,7 @@ const httpOptions = {
 })
 export class ExerciseService {
 
-  private url = "http://localhost:8000";
+  private url = Constants.API_ENDPOINT;
 
   constructor(private http: HttpClient) { }
 

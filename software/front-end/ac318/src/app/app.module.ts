@@ -2,7 +2,7 @@ import 'hammerjs';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatFormFieldModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatFormFieldModule, MatDialogModule, MatMenuModule, MatCardModule } from '@angular/material';
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -35,6 +35,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatButtonModule,
     MatFormFieldModule,
     MatDialogModule,
+    MatMenuModule,
+    MatCardModule,
     AppRoutingModule
   ],
   providers: [LoginService, AuthGuard],

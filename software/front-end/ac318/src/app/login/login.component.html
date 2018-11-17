@@ -23,11 +23,11 @@
     <i class="material-icons right">send</i>
   </button>
 </div>-->
-
-<form layout-align="center center">
+<mat-card class="group col s6">
   <div class="group row col s6">
-    <label class="login title"><h5>Bem vindo à Listoteca!</h5></label><br />
+    <label class="login title"><h5 class="login title">Bem vindo à Listoteca!</h5></label>
   </div>
+  <br />
   <div class="group row input-field col s6">
     <input id="user" name="user" [(ngModel)]="user.name" type="text" class="validate" required>
     <label class="active" for="user">Usuário</label>
@@ -44,7 +44,7 @@
   </div>
   <button mat-button class="button buttonBlue" (click)="doLogin()">Login</button>
 
-</form>
+</mat-card>
 
 <!--<footer><a href="http://www.polymer-project.org/" target="_blank"><img src="https://www.polymer-project.org/images/logos/p-logo.svg"></a>
   <p>You Gotta Love <a href="http://www.polymer-project.org/" target="_blank">Google</a></p>

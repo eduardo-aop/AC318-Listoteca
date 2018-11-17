@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { User } from './user';
 import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Constants } from '../constants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,7 +16,7 @@ const httpOptions = {
 })
 export class LoginService {
 
-  private url = 'http://localhost:8000';
+  private url = Constants.API_ENDPOINT;
   private userAuthenticated = false;
   showNavBarEmitter = new EventEmitter<boolean>();
 

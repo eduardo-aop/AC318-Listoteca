@@ -1,6 +1,7 @@
 <nav *ngIf="showMenu">
   <div class="nav-wrapper blue">
     <a routerLink="/" class="brand-logo center">Listoteca</a>
+    <a [matMenuTriggerFor]="menu" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li><a routerLink="">Home</a></li>
       <li><a routerLink="exercise">Lista de Exercícios</a></li>
@@ -9,6 +10,13 @@
     </ul>
   </div>
 </nav>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="">Home</button>
+  <button mat-menu-item routerLink="exercise">Lista de Exercícios</button>
+  <button mat-menu-item routerLink="exercise/add">Elaborar Exercício</button>
+  <button mat-menu-item (click)="logout()">Sair</button>
+</mat-menu>
 
 <div class="container">
   <router-outlet></router-outlet>
