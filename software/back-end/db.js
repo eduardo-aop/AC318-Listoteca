@@ -5,7 +5,7 @@ var dbData = {
     user: 'root',
     password: '',
     database: 'ac318',
-    port: '3307'
+    port: '3306'
 };
 
 exports.dbData = dbData;

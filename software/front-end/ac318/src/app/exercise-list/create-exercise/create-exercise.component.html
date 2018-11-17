@@ -8,16 +8,19 @@
   </div>
 
   <form>
+    <div class="group row col s6">
+      <label class="login title"><h5>Crie sua lista de exercícios:</h5></label><br />
+    </div>
     <p>
       <label>
         <input class="with-gap" name="group1" type="radio" (click)="setOpenQuestion(true)" checked />
-        <span>Aberta</span>
+        <span>Questão aberta</span>
       </label>
     </p>
     <p>
       <label>
         <input class="with-gap" name="group1" type="radio" (click)="setOpenQuestion(false)" />
-        <span>Fechada</span>
+        <span>Questão fechada</span>
       </label>
     </p>
   </form>
@@ -55,25 +58,25 @@
         <div class="row">
           <div class="input-field col s12">
             <input [(ngModel)]="exercise.answers[0]" id="first" type="text" class="validate">
-            <label for="first">Primeira Alternativa</label>
+            <label for="first">Primeira Alternativa:</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input [(ngModel)]="exercise.answers[1]" id="second" type="text" class="validate">
-            <label for="second">Segunda Alternativa</label>
+            <label for="second">Segunda Alternativa:</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input [(ngModel)]="exercise.answers[2]" id="third" type="text" class="validate">
-            <label for="third">Terceira Alternativa</label>
+            <label for="third">Terceira Alternativa:</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input [(ngModel)]="exercise.answers[3]" id="fourth" type="text" class="validate">
-            <label for="fourth">Quarta Alternativa</label>
+            <label for="fourth">Quarta Alternativa:</label>
           </div>
         </div>
       </div>
