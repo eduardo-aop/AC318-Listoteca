@@ -11,11 +11,11 @@ export class HomeComponent implements OnInit {
   direction = 'right';
   directionToggle = true;
   autoplay = true;
-  avatars = '1234567890'.split('').map((x, i) => {
+  avatars = '1234'.split('').map((x, i) => {
     const num = i;
-    // const num = Math.floor(Math.random() * 1000);
+    console.log(num);
     return {
-      url: `https://picsum.photos/600/400/?${num}`,
+      url: `../../assets/${num}.jpg`,
       title: `${num}`
     };
   });
